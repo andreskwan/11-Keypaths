@@ -15,7 +15,7 @@ protocol Identifiable {
 
 struct Person: Identifiable {
     static let idKey = \Person.socialSecurityNumber
-    var socialSecurityNumber: String
+    var socialSecurityNumber: Int
     var name: String
 }
 
@@ -25,5 +25,13 @@ struct Book: Identifiable {
     var title: String
 }
 
+func printID<T: Identifiable>(thing: T) {
+    print(thing[keyPath: T.idKey])
+}
 
+let taylor = Person(socialSecurityNumber: 555555555, name: "Taylor Swift")
+printID(thing: taylor)
+
+let book = Book(isbn: "isbn-lala", title: "Inferno")
+printID(thing: book)
 
